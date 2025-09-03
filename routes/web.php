@@ -30,3 +30,4 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/', [App\Http\Controllers\AntrianController::class, 'indexUser'])->name('user');
 Route::get('/antrian/json', [App\Http\Controllers\AntrianController::class, 'json'])->name('antrian.json');
+Route::get('/antrian/table-json', [App\Http\Controllers\AntrianController::class, 'tableJson'])->name('antrian.tableJson');

@@ -74,21 +74,28 @@ class AntrianController extends Controller
     public function index()
     {
         $antrians = Antrian::orderBy('id', 'desc')->get();
-        $getWaiting = Antrian::where('status', 'menunggu')->get();
-        $getNoTerkini = Antrian::where('status', 'proses')->first();
+        $getWaiting = Antrian::orderBy('id', 'asc')->where('status', 'menunggu')->get();
+        $getProcess = Antrian::where('status', 'proses')->first();
         $is_hv_waiting = (count($getWaiting) != 0) ? true : false;
 
-        if ($getNoTerkini) {
-            $nomor_terkini = $getNoTerkini;
+        if ($getProcess) {
+            $getData = $getProcess;
             $is_hv_process = true;
         } else {
-            $getNoTerkini = Antrian::orderBy('id', 'desc')->first();
-            $nomor_terkini = $getNoTerkini;
+            $getProcess = Antrian::orderBy('id', 'desc')->first();
+            $getData = $getProcess;
             $is_hv_process = false;
         }
+
         $allDone = (!$is_hv_process && !$is_hv_waiting);
-        // dd($getNoTerkini);
-        return view('admin.dashboard', compact('antrians', 'nomor_terkini', 'is_hv_process', 'is_hv_waiting', 'allDone'));
+        if ($allDone) {
+            $no_terkini = 'Semua Antrian Selesai';
+        } else if (!$is_hv_process && $is_hv_waiting) {
+            $no_terkini = 'Belum Ada Antrian';
+        } else {
+            $no_terkini = $getProcess->no_antrian;
+        }
+        return view('admin.dashboard', compact('antrians', 'getData', 'is_hv_process', 'is_hv_waiting', 'allDone', 'no_terkini'));
     }
 
     public function indexUser()
@@ -112,6 +119,12 @@ class AntrianController extends Controller
         return response()->json([
             'no_antrian' => $nomor_terkini ? $nomor_terkini->no_antrian : '-'
         ]);
+    }
+
+    public function tableJson()
+    {
+        $antrians = Antrian::orderBy('id', 'desc')->get();
+        return response()->json($antrians);
     }
 
     // Menambah data antrian baru

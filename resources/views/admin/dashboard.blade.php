@@ -42,7 +42,7 @@
                         <div class="col mr-2">
                             <div class="font-weight-bold text-primary text-uppercase mb-1">
                                 Nomor Antrian</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{($allDone) ? 'Semua Antrian Selesai' : $nomor_terkini->no_antrian}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $no_terkini }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-clipboard fa-2x text-primary"></i>
@@ -55,14 +55,14 @@
 
                     <form action="{{ route('antrian.previous') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="id" value="{{ $nomor_terkini->id ?? '' }}">
+                        <input type="hidden" name="id" value="{{ $getData->id ?? '' }}">
                         <button type="submit" class="btn btn-danger btn-block" @if (!$is_hv_process && !$allDone) disabled @endif>Previous</button>
                     </form>
                 </div>
                 <div class="col">
                     <form action="{{ route('antrian.next') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="id" value="{{ $nomor_terkini->id ?? '' }}">
+                        <input type="hidden" name="id" value="{{ $getData->id ?? '' }}">
                         <button type="submit" class="btn btn-primary btn-block" @if ($allDone) disabled @endif>Next</button>
                     </form>
                 </div>

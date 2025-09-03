@@ -9,7 +9,7 @@
         <div class="col-xl-3 col-md-6 mb-4 mx-auto" id="headerAntrian">
             <div class="row mb-3">
                 <div class="col text-center">
-                    <button type="button" class="btn btn-success btn-block mx-auto" style="max-width:200px;" data-toggle="modal" data-target="#modalTambahAntrian">Tambah</button>
+                    <button type="button" class="btn btn-success btn-block mx-auto" style="max-width:200px;" data-toggle="modal" data-target="#modalTambahAntrian">Antrian Baru</button>
                 </div>
 
                 <!-- Modal Tambah Antrian -->

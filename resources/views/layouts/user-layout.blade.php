@@ -23,6 +23,10 @@
             <!-- Main Content -->
             <div id="content">
 
+                <!-- Topbar -->
+                @include('partials.admin.topbar-user')
+                <!-- End of Topbar -->
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @yield('content')

@@ -28,3 +28,10 @@ DB_PASSWORD=
 6. Run Project
 
 `php artisan serve`
+
+User Admin Login:
+
+```
+email: admin@example.com
+password: admin
+```
